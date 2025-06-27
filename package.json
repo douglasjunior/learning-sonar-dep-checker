@@ -1,5 +1,5 @@
 {
-  "name": "sonar-dep-checker",
+  "name": "learning-sonar-dep-checker",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Douglas Nassif Roma Junior",
