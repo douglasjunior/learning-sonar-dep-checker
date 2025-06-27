@@ -1,0 +1,39 @@
+services:
+  sonarqube:
+    image: sonarqube:25.6.0.109173-community
+    container_name: sonarqube
+    depends_on:
+      - sonar_db
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://sonar_db:5432/sonar
+      SONAR_JDBC_USERNAME: sonar
+      SONAR_JDBC_PASSWORD: sonar
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./sonar-conf:/opt/sonarqube/conf
+      - ./sonar-data:/opt/sonarqube/data
+      - ./sonar-extensions:/opt/sonarqube/extensions
+    restart: unless-stopped
+    privileged: true
+    networks:
+      - shared_network
+
+  sonar_db:
+    image: postgres:17
+    container_name: sonar_db
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonar
+    volumes:
+      - ./postgres:/var/lib/postgresql
+      - ./postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    privileged: true
+    networks:
+      - shared_network
+
+networks:
+  shared_network:
+    driver: bridge
