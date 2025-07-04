@@ -15,7 +15,6 @@ services:
       - ./sonar-data:/opt/sonarqube/data
       - ./sonar-extensions:/opt/sonarqube/extensions
     restart: unless-stopped
-    privileged: true
     networks:
       - shared_network
 
@@ -30,7 +29,6 @@ services:
       - ./postgres:/var/lib/postgresql
       - ./postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
-    privileged: true
     networks:
       - shared_network
 

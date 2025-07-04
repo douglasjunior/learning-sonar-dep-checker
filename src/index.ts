@@ -1,10 +1,16 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
 
-const clientId = 'squ_a5dac0c9e48b1f7ff3e7ee0b0a3ec7e90b52a9ab';
+dotenv.config({ quiet: true });
+
+const { SONAR_TOKEN, SONAR_PROJECT_KEY, SONAR_BASE_URL } = process.env;
+
+const clientId = SONAR_TOKEN;
+const projectKey = SONAR_PROJECT_KEY;
 const credentials = `${clientId}:`;
 const token = Buffer.from(credentials).toString('base64')
 
-axios.defaults.baseURL = 'http://localhost:9000';
+axios.defaults.baseURL = SONAR_BASE_URL;
 axios.defaults.headers.common.Authorization = `Basic ${token}`;
 
 type Metric = {
@@ -61,7 +67,7 @@ const METRICS = [
 async function getMeasures() {
   const response = await axios.get<MeasuresResponse>('/api/measures/component', {
     params: {
-      component: 'DGS-Health-Panel-Front',
+      component: projectKey,
       metricKeys: METRICS.join(','),
     },
   });
