@@ -11,9 +11,9 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - ./sonar-conf:/opt/sonarqube/conf
-      - ./sonar-data:/opt/sonarqube/data
-      - ./sonar-extensions:/opt/sonarqube/extensions
+      - sonar-conf:/opt/sonarqube/conf
+      - sonar-data:/opt/sonarqube/data
+      - sonar-extensions:/opt/sonarqube/extensions
     restart: unless-stopped
     networks:
       - shared_network
@@ -26,8 +26,7 @@ services:
       POSTGRES_PASSWORD: sonar
       POSTGRES_DB: sonar
     volumes:
-      - ./postgres:/var/lib/postgresql
-      - ./postgres_data:/var/lib/postgresql/data
+      - sonar-postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
     networks:
       - shared_network
@@ -35,3 +34,9 @@ services:
 networks:
   shared_network:
     driver: bridge
+
+volumes:
+  sonar-conf:
+  sonar-data:
+  sonar-extensions:
+  sonar-postgres-data:
