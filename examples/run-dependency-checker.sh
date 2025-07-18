@@ -7,7 +7,7 @@ DC_DIRECTORY=$HOME/.OWASP-Dependency-Check
 DC_PROJECT="dependency-check scan: $(pwd)"
 DATA_DIRECTORY="$DC_DIRECTORY/data"
 CACHE_DIRECTORY="$DC_DIRECTORY/data/cache"
-REPORTS_DIRECTORY="$(pwd)/reports"
+REPORTS_DIRECTORY="$(pwd)/odc-reports"
 
 NVD_API_KEY="<your-nvd-api-key-here>"
 
